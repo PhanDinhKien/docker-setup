@@ -56,6 +56,19 @@ services:
     networks:
       - elastic_network
 
+  sqlserver:
+    build: ./sqlserver
+    container_name: sqlserver
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Kk@0975596489"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express" # Options: Developer, Express, Standard, Enterprise
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
 networks:
   elastic_network:
     driver: bridge
@@ -69,3 +82,5 @@ volumes:
     driver: local
   elasticsearch_data:
     driver: local
+  sqlserver-data:
+      driver: local
